@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- for test -->
     <display-img></display-img>
   </div>
 </template>

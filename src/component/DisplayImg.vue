@@ -157,6 +157,7 @@ export default {
         color: #ffffff;
         .di-img-del {
           position: absolute;
+          left: 0;
           width: 200px;
           text-align: center;
           font-size: 60px;
