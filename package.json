@@ -1,11 +1,11 @@
 {
 		"name": "display-img",
 		"version": "0.0.6",
-		"description": "Display images at web without a server.\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[Dweb pages without uploading.",
+		"description": "Display images at web without a server.",
 		"main": "src/index.js",
 		"scripts": {
 				"test": "echo \"Error: no test specified\" && exit 1",
-				"start": "webpack-dev-server --hot --inline",
+				"start": "webpack-dev-server --inline --config webpack.config.dev.js",
 				"build": "webpack --display-error-details --config webpack.config.js"
 		},
 		"keywords": [

@@ -1,17 +1,23 @@
-const path = require("path");
-const webpack = require("webpack");
-const uglify = require("uglifyjs-webpack-plugin");
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+"use strict";
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+const HOST = process.env.HOST;
+const PORT = process.env.PORT && Number(process.env.PORT);
 
 module.exports = {
   devtool: "source-map",
   entry: "./src/index.js", //入口文件，就是上步骤的src目录下的index.js文件，
-  output: {
-    path: path.resolve(__dirname, "./dist"), //输出路径，就是上步骤中新建的dist目录，
-    publicPath: "/dist/",
-    filename: "displayImg.min.js",
-    libraryTarget: "umd",
-    umdNamedDefine: true,
+  // cheap-module-eval-source-map is faster for development
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js' 
+    }
+  },
+  // these devServer options should be customized in /config/index.js
+  devServer: {
+    clientLogLevel: "warning",
+    host: HOST,
+    port: PORT,
   },
   module: {
     rules: [
@@ -43,15 +49,11 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: JSON.stringify("development"),
-      },
-    }),
+    // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.html',
-      inject: true
-    })
-  ]
+      filename: "index.html",
+      template: "index.html",
+      inject: true,
+    }),
+  ],
 };
