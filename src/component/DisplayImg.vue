@@ -1,26 +1,21 @@
 <template>
-  <div class="upload-writ-content">
-    <section class="writ-wrapper">
+  <div class="di-content">
+    <section class="di-img-wrapper">
       <div>
         <div v-for="(img, index) in imgArr" :key="index">
-          <div class="writ-show">
-            <img width="200px" :src="img.path" alt="" class="img-style" />
-            <div class="writ-oper">
-              <i
-                @click="del(index)"
-                class="el-icon-delete public del-right"
-              ></i>
-              <span class="down-file-name" :title="img.name">{{
-                img.name
-              }}</span>
+          <div class="di-img-box">
+            <img width="200px" :src="img.path" alt="" class="di-img-style" />
+            <div class="di-img-opration">
+              <span @click="del(index)" class="di-img-del">-</span>
+              <span class="di-img-name" :title="img.name">{{ img.name }}</span>
             </div>
           </div>
         </div>
-        <section class="buttons-wrapper">
-          <div class="upload-proof-tips" @click="select"></div>
+        <section class="di-buttons">
+          <div class="di-select-btn" @click="select"></div>
           <input
             style="display: none"
-            id="file-uploader"
+            id="di-img-loader"
             type="file"
             name="file"
             multiple="multiple"
@@ -44,7 +39,7 @@ export default {
   },
   methods: {
     init() {
-      let uploader = document.getElementById("file-uploader");
+      let uploader = document.getElementById("di-img-loader");
       uploader.addEventListener("change", (event) => {
         if (!this.validate(uploader)) return;
         Array.prototype.forEach.call(uploader.files, (file) => {
@@ -80,27 +75,27 @@ export default {
       });
       return res;
     },
-    // 触发file-uploader的click事件
+    // 触发di-img-loader的click事件
     select() {
-      let uploader = document.getElementById("file-uploader");
+      let uploader = document.getElementById("di-img-loader");
       uploader.click();
     },
     // 删除图片
     del(ind) {
       this.imgArr.splice(ind, 1);
-      document.getElementById('file-uploader').value = null
-    }
+      document.getElementById("di-img-loader").value = null;
+    },
   },
 };
 </script>
 
 <style lang="less" scoped>
-.upload-writ-content {
+.di-content {
+  max-height: 70vh;
   position: relative;
   padding: 10px;
-  .buttons-wrapper {
-    padding-bottom: 10px;
-    .upload-proof-tips {
+  .di-buttons {
+    .di-select-btn {
       width: 200px;
       height: 146px;
       text-align: center;
@@ -108,26 +103,19 @@ export default {
       background: #eef5f9;
       border: 1px dashed #c0ccda;
       border-radius: 6px;
-      box-sizing: border-box;
       font-size: 40px;
-      color: #0099ff;
+      color: #c0ccda;
+      box-sizing: border-box;
       cursor: pointer;
-      &::before {
-        content: "+";
-      }
       &:hover {
         border: 1px dashed #0099ff;
       }
-      .iconshangchuan {
-        color: #0099ff;
+      &::before {
+        content: "+";
       }
     }
-    i {
-      margin-bottom: 17px;
-      vertical-align: bottom;
-    }
   }
-  .writ-wrapper {
+  .di-img-wrapper {
     overflow-y: auto;
     overflow-x: hidden;
     > div {
@@ -139,7 +127,7 @@ export default {
       margin-bottom: 30px;
     }
   }
-  .writ-show {
+  .di-img-box {
     width: 200px !important;
     height: 146px;
     position: relative;
@@ -147,7 +135,7 @@ export default {
     margin-right: 10px;
     margin-bottom: 10px;
     border-radius: 6px;
-    .img-style {
+    .di-img-style {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -155,36 +143,36 @@ export default {
       top: 0;
       left: 0;
     }
-    .writ-oper {
+    .di-img-opration {
       visibility: hidden;
       width: 220px;
       height: 146px;
     }
     &:hover {
-      .writ-oper {
+      .di-img-opration {
         visibility: visible;
         position: relative;
         background-color: rgba(0, 0, 0, 0.5);
         font-size: 30px;
         color: #ffffff;
-        .public {
+        .di-img-del {
           position: absolute;
-          top: 40%;
-          &:hover {
-            cursor: pointer;
-          }
+          width: 200px;
+          text-align: center;
+          font-size: 60px;
+          margin-top: 20px;
+          color: rgba(255, 255, 255, .8);
+          cursor: pointer;
         }
-        .del-right {
-          right: 20%;
-        }
-        .down-file-name {
+        .di-img-name {
           display: inline-block;
           max-height: 60px;
           text-align: center;
-          width: 100%;
+          width: 200px;
           font-size: 14px;
           position: absolute;
           bottom: 5px;
+          left: 0;
           text-overflow: ellipsis;
           white-space: nowrap;
           overflow: hidden;
